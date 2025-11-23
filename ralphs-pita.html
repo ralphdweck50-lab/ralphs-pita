@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ralph's Pita Delivery</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #fef6e4;
+    color: #333;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 10px 90px 10px;
+  }
+
+  .title-box {
+    background-color: #ffa500;
+    border-radius: 15px;
+    text-align: center;
+    padding: 20px;
+    margin-top: 20px;
+  }
+
+  .title-box h1 {
+    margin: 0;
+    color: #fff;
+    font-weight: bold;
+    font-size: 2em;
+  }
+
+  .subtitle {
+    text-align: center;
+    font-size: 1em;
+    color: #fff;
+    margin-top: 5px;
+  }
+
+  .menu {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+  }
+
+  .item {
+    background-color: #fff3e6;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+  }
+
+  .item h3 {
+    margin: 0 0 5px 0;
+    font-weight: bold;
+    font-size: 1.1em;
+  }
+
+  .item p {
+    margin: 0 0 10px 0;
+    font-size: 0.95em;
+  }
+
+  .quantity-container-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 120px;
+    margin-top: 10px;
+    padding: 5px;
+    border: 2px solid #d94f04;
+    border-radius: 12px;
+    background-color: #fff3e6;
+  }
+
+  .quantity-container-box button {
+    background-color: #d94f04;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+    cursor: pointer;
+  }
+
+  .quantity-container-box span {
+    font-weight: bold;
+    width: 40px;
+    text-align: center;
+    font-size: 1.2em;
+  }
+
+  .section {
+    background-color: #fff3e6;
+    border-radius: 15px;
+    padding: 15px;
+    margin-top: 20px;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+  }
+
+  input[type="text"], textarea {
+    width: 100%;
+    margin: 5px 0 10px 0;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+
+  .field-label {
+    margin-top: 10px;
+    margin-bottom: 3px;
+    font-weight: bold;
+  }
+
+  .payment-options {
+    display: flex;
+    gap: 10px;
+    margin: 5px 0 10px 0;
+  }
+
+  .payment-options button {
+    flex: 1;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    background-color: #fff;
+  }
+
+  .payment-options button.selected {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+  }
+
+  .bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff3e6;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+  }
+
+  .place-order {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  .contact {
+    text-align: center;
+    font-size: 0.8em;
+    margin-top: 20px;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="title-box">
+  <h1>Ralph's Pita Delivery</h1>
+  <p class="subtitle">Delivery Every Friday</p>
+</div>
+
+<div class="menu">
+  <div class="item">
+    <h3>Regular Pita</h3>
+    <p>• 5 per bag<br>$5</p>
+    <div class="quantity-container-box">
+      <button onclick="changeQty('regular', -1)">-</button>
+      <span id="regularQty">0</span>
+      <button onclick="changeQty('regular', 1)">+</button>
+    </div>
+  </div>
+
+  <div class="item">
+    <h3>Whole Wheat Pita</h3>
+    <p>• 5 per bag<br>$5</p>
+    <div class="quantity-container-box">
+      <button onclick="changeQty('wheat', -1)">-</button>
+      <span id="wheatQty">0</span>
+      <button onclick="changeQty('wheat', 1)">+</button>
+    </div>
+  </div>
+
+  <div class="item">
+    <h3>Mini Pita</h3>
+    <p>• 8 per bag<br>$5</p>
+    <div class="quantity-container-box">
+      <button onclick="changeQty('mini', -1)">-</button>
+      <span id="miniQty">0</span>
+      <button onclick="changeQty('mini', 1)">+</button>
+    </div>
+  </div>
+
+  <div class="item">
+    <h3>Spelt Pita</h3>
+    <p>• 3 per bag<br>$5</p>
+    <div class="quantity-container-box">
+      <button onclick="changeQty('spelt', -1)">-</button>
+      <span id="speltQty">0</span>
+      <button onclick="changeQty('spelt', 1)">+</button>
+    </div>
+  </div>
+
+  <div class="item">
+    <h3>Plain Laffa</h3>
+    <p>• 2 Large per bag<br>$5</p>
+    <div class="quantity-container-box">
+      <button onclick="changeQty('plainLaffa', -1)">-</button>
+      <span id="plainLaffaQty">0</span>
+      <button onclick="changeQty('plainLaffa', 1)">+</button>
+    </div>
+  </div>
+
+  <div class="item">
+    <h3>Zahatar Laffa</h3>
+    <p>• 2 Large per bag<br>$5</p>
+    <div class="quantity-container-box">
+      <button onclick="changeQty('zahatarLaffa', -1)">-</button>
+      <span id="zahatarLaffaQty">0</span>
+      <button onclick="changeQty('zahatarLaffa', 1)">+</button>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>Customer Info</h3>
+  <label class="field-label">👤 Name</label>
+  <input type="text" id="name" placeholder="Your Name">
+
+  <label class="field-label">📍 Delivery Address</label>
+  <input type="text" id="address" placeholder="Enter Address">
+
+  <label class="field-label">$ Payment Method</label>
+  <div class="payment-options">
+    <button onclick="selectPayment('Venmo')" id="venmoBtn">Venmo</button>
+    <button onclick="selectPayment('Cash')" id="cashBtn">Cash</button>
+    <button onclick="selectPayment('Other')" id="otherBtn">Other</button>
+  </div>
+
+  <input type="text" id="venmoField" placeholder="Venmo Username" style="display:none;">
+  <input type="text" id="otherField" placeholder="Other Payment Info" style="display:none;">
+
+  <label class="field-label">Additional Notes</label>
+  <textarea id="notes" placeholder="Add any notes..."></textarea>
+</div>
+
+<div class="bottom-bar">
+  <span>Total: $<span id="totalPrice">0</span></span>
+  <button class="place-order" onclick="placeOrder()">Place Order</button>
+</div>
+
+<p class="contact">If you have any questions or concerns, text 917-581-4175</p>
+
+<script>
+let prices = {regular:5, wheat:5, mini:5, spelt:5, plainLaffa:5, zahatarLaffa:5};
+let quantities = {regular:0, wheat:0, mini:0, spelt:0, plainLaffa:0, zahatarLaffa:0};
+
+function changeQty(item, delta){
+  quantities[item] = Math.max(0, quantities[item] + delta);
+  document.getElementById(item+'Qty').innerText = quantities[item];
+  updateTotal();
+}
+
+function updateTotal(){
+  let total = 0;
+  for(let key in quantities){
+    total += quantities[key]*prices[key];
+  }
+  document.getElementById('totalPrice').innerText = total;
+}
+
+function selectPayment(method){
+  document.getElementById('venmoField').style.display = method==='Venmo'?'block':'none';
+  document.getElementById('otherField').style.display = method==='Other'?'block':'none';
+  
+  document.getElementById('venmoBtn').classList.remove('selected');
+  document.getElementById('cashBtn').classList.remove('selected');
+  document.getElementById('otherBtn').classList.remove('selected');
+
+  if(method==='Venmo') document.getElementById('venmoBtn').classList.add('selected');
+  if(method==='Cash') document.getElementById('cashBtn').classList.add('selected');
+  if(method==='Other') document.getElementById('otherBtn').classList.add('selected');
+}
+
+function placeOrder(){
+  let name = document.getElementById('name').value;
+  let address = document.getElementById('address').value;
+  let payment = document.querySelector('.payment-options button.selected')?.innerText || '';
+  let venmo = document.getElementById('venmoField').value;
+  let other = document.getElementById('otherField').value;
+  let notes = document.getElementById('notes').value;
+
+  let orderDetails = `
+Name: ${name}
+Address: ${address}
+Payment Method: ${payment}
+Venmo: ${venmo}
+Other: ${other}
+Notes: ${notes}
+Quantities: ${JSON.stringify(quantities)}
+Total Price: $${document.getElementById('totalPrice').innerText}
+`;
+
+  window.location.href = `mailto:ralphdweck50@gmail.com?subject=New Pita Order&body=${encodeURIComponent(orderDetails)}`;
+  alert("Order ready to send! Your email program should open.");
+}
+</script>
+
+</body>
+</html>
