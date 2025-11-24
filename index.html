@@ -318,6 +318,18 @@ Total Price: $${document.getElementById('totalPrice').innerText}
   alert("Order ready to send! Your email program should open.");
 }
 </script>
+<script>
+async function sendOrder() {
+  try {
+    const res = await fetch("/api/send-order", { method: "POST" });
+    const data = await res.json();
+    alert(data.message); // Shows “Order sent!”
+  } catch (e) {
+    alert("Error sending order");
+  }
+}
 
-</body>
+// Connect the function to your button
+document.querySelector(".place-order").addEventListener("click", sendOrder);
+</script></body>
 </html>
